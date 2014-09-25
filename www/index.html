@@ -1,0 +1,1239 @@
+
+<!DOCTYPE html>
+  <html>
+  <head>
+  <script src="https://apis.google.com/js/client.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  <script type="text/javascript"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <script type="application/shiny-singletons">321b0ac180cf2053358820f06a720ed5d9e7b825,7196694b46f8e7c34171939351e3a70cdd3ccf40</script>
+  <script type="application/html-dependencies">json2[2014.02.04];jquery[1.11.0];shiny[0.10.1];bootstrap-datepicker[1.0.2];selectize[0.8.5];datatables[1.9.4];datatables-bootstrap[1.9.4];bootstrap[2.3.2];bootstrap-responsive[2.3.2]</script>
+  <script src="shared/json2-min.js"></script>
+  <script src="shared/jquery.js"></script>
+  <link href="shared/shiny.css" rel="stylesheet" />
+  <script src="shared/shiny.js"></script>
+  <link href="shared/datepicker/css/datepicker.css" rel="stylesheet" />
+  <script src="shared/datepicker/js/bootstrap-datepicker.min.js"></script>
+  <link href="shared/selectize/css/selectize.bootstrap2.css" rel="stylesheet" />
+  <!--[if lt IE 9]>
+  <script src="shared/selectize/js/es5-shim.min.js"></script>
+  <![endif]-->
+  <script src="shared/selectize/js/selectize.min.js"></script>
+  <script src="shared/datatables/js/jquery.dataTables.min.js"></script>
+  <link href="shared/datatables/css/DT_bootstrap.css" rel="stylesheet" />
+  <script src="shared/datatables/js/DT_bootstrap.js"></script>
+  <link href="shared/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+  <script src="shared/bootstrap/js/bootstrap.min.js"></script>
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="shared/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" />
+  <title>GDELT Data Dashboard</title>
+  <link rel="stylesheet" type="text/css" href="shared/font-awesome/css/font-awesome.min.css"/>
+  
+  </head>
+  <body>
+  <div class="container-fluid">
+  <h2 style="padding: 10px 0px;">GDELT-Board</h2>
+  <div class="row-fluid">
+  <div class="span4">
+  <form class="well">
+  <div id="dates" class="shiny-date-range-input input-daterange">
+  <label class="control-label" for="dates">
+  <h3>Date range</h3>
+  </label>
+  <input class="input-small" type="text" data-date-language="en" data-date-weekstart="0" data-date-format="yyyy-mm-dd" data-date-start-view="month" id="date1"/>
+  to 
+  <input class="input-small" type="text" data-date-language="en" data-date-weekstart="0" data-date-format="yyyy-mm-dd" data-date-start-view="month" id="date2"/>
+  </div>
+  <label for="ProjectID">
+  <h3>Project Id input</h3>
+  </label>
+  <input id="ProjectID" type="text" value="Enter Google Big Query Project ID..."/>
+  <label for="ClientID">
+  <h3>Client Id input</h3>
+  </label>
+  <input id="ClientID" type="text" value="Enter Google Big Query Client ID..."/>
+  <label class="control-label" for="Country">
+  <h3>Select Actor 1</h3>
+  </label>
+  <select id="Country"><option value="AAM" selected>Al Aqsa Martyrs Brigade</option>
+  <option value="aar">Afar</option>
+  <option value="ABD">Arab Bank for Economic Development in Africa</option>
+  <option value="abk">Abkhaz</option>
+  <option value="abr">Aboriginal-Australians</option>
+  <option value="ABW">Aruba</option>
+  <option value="ACC">Arab Cooperation Council</option>
+  <option value="ace">Acehnese</option>
+  <option value="acg">Achang</option>
+  <option value="ach">Acholi</option>
+  <option value="ada">Ga</option>
+  <option value="ADB">Asian Development Bank</option>
+  <option value="adi">Adivasi</option>
+  <option value="adj">Adjarians</option>
+  <option value="ADR">African Diasporic Religion</option>
+  <option value="ady">Adyghe</option>
+  <option value="AEU">Arab Economic Unity Council</option>
+  <option value="afa">Black-African</option>
+  <option value="AFB">African Development Bank</option>
+  <option value="AFG">Afghanistan</option>
+  <option value="afr">Afrikaners</option>
+  <option value="AFR">Africa</option>
+  <option value="AGO">Angola</option>
+  <option value="ahm">Ahmadis</option>
+  <option value="AIA">Anguilla</option>
+  <option value="ain">Ainu</option>
+  <option value="aja">Aja</option>
+  <option value="aka">Akan</option>
+  <option value="aku">Aku</option>
+  <option value="ala">Alawi</option>
+  <option value="ALA">Aland Islands</option>
+  <option value="alb">Albanian</option>
+  <option value="ALB">Albania</option>
+  <option value="ale">Aleut</option>
+  <option value="ALE">Alewi</option>
+  <option value="alg">Algonquian</option>
+  <option value="ALQ">Al Qaeda</option>
+  <option value="alt">Altay</option>
+  <option value="alu">Alur</option>
+  <option value="amb">Ambonese</option>
+  <option value="ame">Americo-Liberians</option>
+  <option value="AMF">Arab Monetary Fund for Economic and Social Development</option>
+  <option value="amh">Amhara</option>
+  <option value="AML">Amal Militia</option>
+  <option value="AMN">Amnesty International</option>
+  <option value="AMU">Arab Maghreb Union</option>
+  <option value="AND">Andorra</option>
+  <option value="ANO">Abu Nidal Organization</option>
+  <option value="anp">Angika speakers</option>
+  <option value="ANT">Netherlands Antilles</option>
+  <option value="apa">Apache</option>
+  <option value="APE">Org. of Arab Petroleum Exporting Countries (OAPEC)</option>
+  <option value="ara">Arab</option>
+  <option value="ARB">Arab</option>
+  <option value="ARE">United Arab Emirates</option>
+  <option value="arg">Aragonese</option>
+  <option value="ARG">Argentina</option>
+  <option value="ARL">Arab League</option>
+  <option value="arm">Armenian</option>
+  <option value="ARM">Armenia</option>
+  <option value="arn">Mapuche</option>
+  <option value="arp">Arapaho</option>
+  <option value="arw">Arawak</option>
+  <option value="asa">Asian</option>
+  <option value="ASA">Asia</option>
+  <option value="ash">Ashkenazi Jews</option>
+  <option value="ASL">South Lebanon Army</option>
+  <option value="asm">Assamese</option>
+  <option value="ASM">American Samoa</option>
+  <option value="ASN">Association of Southeast Asian Nations (ASEAN)</option>
+  <option value="ast">Asturian</option>
+  <option value="asy">Assyrian</option>
+  <option value="ata">Atacamenos</option>
+  <option value="ATD">Eastern and Southern African Trade and Development Bank</option>
+  <option value="atg">Argentinians</option>
+  <option value="ATG">Antigua and Barbuda</option>
+  <option value="ath">Athabaskan</option>
+  <option value="ATH">Agnostic</option>
+  <option value="ats">Agnostic/Athiest</option>
+  <option value="aus">Australians</option>
+  <option value="AUS">Australia</option>
+  <option value="AUT">Austria</option>
+  <option value="auu">Austrians</option>
+  <option value="ava">Caucasian Avars</option>
+  <option value="awa">Awadhi</option>
+  <option value="aym">Aymara</option>
+  <option value="aze">Azerbaijani</option>
+  <option value="AZE">Azerbaijan</option>
+  <option value="bad">Baganda</option>
+  <option value="BAG">Baghdad</option>
+  <option value="bah">Bahais</option>
+  <option value="BAH">Bahai Faith</option>
+  <option value="bai">Bamileke</option>
+  <option value="bak">Bashkirs</option>
+  <option value="bal">Baloch</option>
+  <option value="bam">Bambara</option>
+  <option value="ban">Balinese</option>
+  <option value="baq">Basque</option>
+  <option value="bar">Bari</option>
+  <option value="bas">Basoga</option>
+  <option value="bay">Gbaya</option>
+  <option value="BCA">Bank of Central African States (BEAC)</option>
+  <option value="bda">Rakhine</option>
+  <option value="BDI">Burundi</option>
+  <option value="bej">Beja</option>
+  <option value="bel">Belarusians</option>
+  <option value="BEL">Belgium</option>
+  <option value="bem">Bemba</option>
+  <option value="ben">Bengali-Hindu</option>
+  <option value="BEN">Benin</option>
+  <option value="ber">Berber</option>
+  <option value="bey">Beydan</option>
+  <option value="BFA">Burkina Faso</option>
+  <option value="BGD">Bangladesh</option>
+  <option value="BGR">Bulgaria</option>
+  <option value="bho">Bhojpuri</option>
+  <option value="BHR">Bahrain</option>
+  <option value="BHS">Bahamas</option>
+  <option value="bih">Bihari</option>
+  <option value="BIH">Bosnia and Herzegovina</option>
+  <option value="bii">Bai</option>
+  <option value="bik">Bicolano</option>
+  <option value="bin">Edo</option>
+  <option value="bis">Urban ni-Vanautu</option>
+  <option value="BIS">Bank for International Settlements</option>
+  <option value="bke">Bateke</option>
+  <option value="bkn">Bakongo</option>
+  <option value="bkw">Bakweri</option>
+  <option value="bla">Siksikawa</option>
+  <option value="blg">Blang</option>
+  <option value="blk">Balkars</option>
+  <option value="BLK">Balkans</option>
+  <option value="bln">Balanta</option>
+  <option value="BLR">Belarus</option>
+  <option value="BLZ">Belize</option>
+  <option value="bmr">Bamar</option>
+  <option value="BMU">Bermuda</option>
+  <option value="bni">Beni-Shugal-Gumez</option>
+  <option value="bnt">Bantu</option>
+  <option value="bny">Banyarwanda</option>
+  <option value="bod">Bodo</option>
+  <option value="bod">Tibetan</option>
+  <option value="bol">Bolivia</option>
+  <option value="BOL">Bolivia</option>
+  <option value="bon">Bonan</option>
+  <option value="bos">Bosniaks</option>
+  <option value="bou">Buyei</option>
+  <option value="bra">Brijwasi</option>
+  <option value="BRA">Brazil</option>
+  <option value="brb">Bariba</option>
+  <option value="BRB">Barbados</option>
+  <option value="bre">Breton</option>
+  <option value="brh">Brahui</option>
+  <option value="brk">Burakumin</option>
+  <option value="brm">Kurichiya</option>
+  <option value="BRN">Brunei Darussalam</option>
+  <option value="bsh">Bushmen</option>
+  <option value="bst">Baster</option>
+  <option value="bsu">Subiya</option>
+  <option value="bte">Beti-Pahuin</option>
+  <option value="BTH">Baath Party</option>
+  <option value="btk">Batak</option>
+  <option value="BTN">Bhutan</option>
+  <option value="bua">Buryat</option>
+  <option value="bud">Buddhist</option>
+  <option value="BUD">Buddhism</option>
+  <option value="bug">Bugis</option>
+  <option value="bul">Bulgarian</option>
+  <option value="BWA">Botswana</option>
+  <option value="byn">Bilen</option>
+  <option value="cab">Cabindan-Mayombe</option>
+  <option value="cad">Caddo</option>
+  <option value="CAF">Central African Republic</option>
+  <option value="CAN">Canada</option>
+  <option value="cap">Cape Verdean</option>
+  <option value="car">Kali'na</option>
+<option value="CAS">Central Asia</option>
+<option value="cat">Catalan</option>
+<option value="CAU">Caucasus</option>
+<option value="ceb">Cebuano</option>
+<option value="CEM">Common Market for Eastern and Southern Africa</option>
+<option value="CEM">Monetary and Economic Community of Central Africa</option>
+<option value="CEU">Central Europe</option>
+<option value="CFA">Franc Zone Financial Community of Africa</option>
+<option value="CFR">Central Africa</option>
+<option value="cha">Chamorro</option>
+<option value="chc">Chukchi</option>
+<option value="che">Chechen</option>
+<option value="CHE">Switzerland</option>
+<option value="chg">Chagatai</option>
+<option value="chi">Chinese</option>
+<option value="chk">Chuukese</option>
+<option value="chl">Chileans</option>
+<option value="CHL">Chile</option>
+<option value="chm">Mari</option>
+<option value="chn">Chinook</option>
+<option value="CHN">China</option>
+<option value="cho">Choctaw</option>
+<option value="chp">Chipewyan</option>
+<option value="chr">Cherokee</option>
+<option value="CHR">Christianity</option>
+<option value="cht">Ch'orti'</option>
+<option value="chv">Chuvash</option>
+<option value="chw">Chewa</option>
+<option value="chy">Cheyenne</option>
+<option value="cir">Adyghe</option>
+<option value="CIS">Commonwealth of Independent States</option>
+<option value="CIV">Ivory Coast</option>
+<option value="cmc">Cham</option>
+<option value="CMN">Communist</option>
+<option value="CMR">Cameroon</option>
+<option value="COD">Democratic Republic of the Congo</option>
+<option value="COE">Council of Europe</option>
+<option value="COG">People's Republic of the Congo</option>
+  <option value="COK">Cook Islands</option>
+  <option value="col">Colombian</option>
+  <option value="COL">Columbia</option>
+  <option value="COM">Comoros</option>
+  <option value="con">Confusian</option>
+  <option value="CON">Confucianism</option>
+  <option value="cop">Coptic Christians</option>
+  <option value="cor">Cornish</option>
+  <option value="cos">Corsican</option>
+  <option value="cot">Cotiers</option>
+  <option value="CPA">Cocoa Producer's Alliance</option>
+<option value="CPC">Association of Coffee Producing Countries</option>
+<option value="cpe">English-Creole</option>
+<option value="cpf">French-Creole</option>
+<option value="cpp">Portuguese-Creole</option>
+<option value="CPT">Coptic</option>
+<option value="CPV">Cape Verde</option>
+<option value="CRB">Caribbean</option>
+<option value="CRC">International Fed. of Red Cross and Red Crescent (ICRC)</option>
+<option value="cre">Cree</option>
+<option value="crh">Crimean Tatar</option>
+<option value="cri">Christian</option>
+<option value="CRI">Costa Rica</option>
+<option value="cro">Orthodox Christian</option>
+<option value="crp">Creole</option>
+<option value="csb">Kashubian</option>
+<option value="csr">Costa Ricans</option>
+<option value="CSS">Community of Sahel-Saharan States (CENSAD)</option>
+<option value="cth">Catholics</option>
+<option value="CTH">Catholic</option>
+<option value="CUB">Cuba</option>
+<option value="cus">Cushitic</option>
+<option value="CWN">Commonwealth of Nations</option>
+<option value="CYM">Cayman Islands</option>
+<option value="CYP">Cyprus</option>
+<option value="cze">Czech</option>
+<option value="CZE">Czech Republic</option>
+<option value="dai">Dai</option>
+<option value="dak">Sioux</option>
+<option value="dal">Dalit</option>
+<option value="dam">Damara</option>
+<option value="dan">Danes</option>
+<option value="dao">Yao (Asia)</option>
+<option value="dar">Dargwa</option>
+<option value="dau">Daur</option>
+<option value="day">Dayak</option>
+<option value="del">Lenape</option>
+<option value="den">Slavey</option>
+<option value="DEU">Germany</option>
+<option value="DFL">Democratic Front for the Lib. of Palestine (DFLP)</option>
+<option value="dgr">Dogrib</option>
+<option value="din">Dinka</option>
+<option value="div">Maldivian</option>
+<option value="dje">Djerma-Songhai</option>
+<option value="DJI">Djibouti</option>
+<option value="DMA">Dominica</option>
+<option value="DNK">Denmark</option>
+<option value="doi">Dogras</option>
+<option value="dom">Dominicans</option>
+<option value="DOM">Dominican Republic</option>
+<option value="don">Dong</option>
+<option value="dox">Dongxiang</option>
+<option value="DOX">Orthodox</option>
+<option value="dra">Dravidian</option>
+<option value="dru">Druze</option>
+<option value="drz">Druze</option>
+<option value="DRZ">Druze</option>
+<option value="dsb">Lower Sorbian</option>
+<option value="dua">Duala</option>
+<option value="dut">Dutch</option>
+<option value="dyu">Dyula</option>
+<option value="DZA">Algeria</option>
+<option value="dzo">Ngalop</option>
+<option value="EAF">Eastern Africa</option>
+<option value="eat">East Timorese</option>
+<option value="EBR">European Bank for Reconstruction and Development</option>
+<option value="ECA">Economic Community of Central African States</option>
+<option value="ecu">Ecuadorians</option>
+<option value="ECU">Ecuador</option>
+<option value="EEC">European Union</option>
+<option value="EEU">Eastern Europe</option>
+<option value="efi">Efik</option>
+<option value="EFT">European Free Trade Association</option>
+<option value="EGY">Egypt</option>
+<option value="ein">East Indian</option>
+<option value="EIN">East Indies</option>
+<option value="eka">Ekajuk</option>
+<option value="eng">English</option>
+<option value="ENN">Ennahda Movement</option>
+<option value="ERI">Eritrea</option>
+<option value="esh">Eshira</option>
+<option value="ESH">Western Sahara</option>
+<option value="ESP">Spain</option>
+<option value="est">Estonian</option>
+<option value="EST">Estonia</option>
+<option value="eth">Ethiopian-Jews</option>
+<option value="ETH">Ethiopia</option>
+<option value="eur">Europeans</option>
+<option value="EUR">Europe</option>
+<option value="eve">Evenks</option>
+<option value="ewe">Ewe</option>
+<option value="ewo">Ewondo</option>
+<option value="fan">Fang</option>
+<option value="fao">Faroese</option>
+<option value="FAO">United Nations Food and Agriculture Organization</option>
+<option value="fat">Fante</option>
+<option value="FID">International Federation of Human Rights (FIDH)</option>
+<option value="fij">Fijian</option>
+<option value="fil">Filipino</option>
+<option value="fin">Finns</option>
+<option value="FIN">Finland</option>
+<option value="FIS">Islamic Salvation Army</option>
+<option value="fiu">Finno-Ugric</option>
+<option value="FJI">Fiji</option>
+<option value="FLK">Falkland Islands</option>
+<option value="FLN">National Liberation Front (FLN)</option>
+<option value="fon">Fon</option>
+<option value="FRA">France</option>
+<option value="fre">French</option>
+<option value="fri">Santals</option>
+<option value="FRO">Faeroe Islands</option>
+<option value="frr">Frisians</option>
+<option value="fru">Fur</option>
+<option value="FSM">Micronesia</option>
+<option value="FTA">Fatah</option>
+<option value="ful">Fula</option>
+<option value="fur">Friulan</option>
+<option value="GAB">Gabon</option>
+<option value="gar">Garifuna</option>
+<option value="gay">Gayo</option>
+<option value="gba">Gbaya</option>
+<option value="GBR">United Kingdom</option>
+<option value="GCC">Gulf Cooperation Council</option>
+<option value="gel">Gelao</option>
+<option value="geo">Georgian</option>
+<option value="GEO">Georgia</option>
+<option value="ger">German</option>
+<option value="GHA">Ghana</option>
+<option value="gia">Gia Rai</option>
+<option value="GIA">Armed Islamic Group (GIA)</option>
+<option value="GIB">Gibraltar</option>
+<option value="gil">Kiribati</option>
+<option value="gin">Gin</option>
+<option value="GIN">Guinea</option>
+<option value="gio">Gio</option>
+<option value="gla">Gaels</option>
+<option value="gle">Irish</option>
+<option value="glg">Galician</option>
+<option value="GLP">Guadeloupe</option>
+<option value="glv">Manx</option>
+<option value="GMB">Gambia</option>
+<option value="GNB">Guinea-Bissau</option>
+<option value="GNQ">Equatorial Guinea</option>
+<option value="GOE">Group of Eight (G-8) (G-7 plus Russia)</option>
+<option value="gon">Gondi</option>
+<option value="gor">Gorontalonese</option>
+<option value="GOS">Group of Seven (G-7)</option>
+<option value="gra">Grassfielders</option>
+<option value="grb">Grebo</option>
+<option value="GRC">Greece</option>
+<option value="GRD">Grenada</option>
+<option value="gre">Greek</option>
+<option value="GRL">Greenland</option>
+<option value="grn">Guarani</option>
+<option value="GSP">Salafist Group</option>
+<option value="GSS">Group of Seventy-Seven (G-77)</option>
+<option value="gsw">Swiss Germans</option>
+<option value="GTM">Guatemala</option>
+<option value="gua">Guatemalan</option>
+<option value="GUF">French Guiana</option>
+<option value="guj">Gujarati</option>
+<option value="GUM">Guam</option>
+<option value="gun">Guan</option>
+<option value="GUY">Guyana</option>
+<option value="gwi">Gwich'in</option>
+  <option value="GZS">Gaza Strip</option>
+  <option value="had">Hadjerai</option>
+  <option value="hai">Haida</option>
+  <option value="har">Harari</option>
+  <option value="hat">Haitian</option>
+  <option value="hau">Hausa</option>
+  <option value="haw">Hawaiian</option>
+  <option value="haz">Hazara</option>
+  <option value="HCH">UN High Commission for Human Rights</option>
+  <option value="HCR">UN High Commission for Refugees</option>
+  <option value="her">Herero</option>
+  <option value="HEZ">Hezbullah</option>
+  <option value="hgh">Hill Tribes</option>
+  <option value="hil">Hiligayon</option>
+  <option value="him">Himachali</option>
+  <option value="hin">Hindu</option>
+  <option value="HIN">Hinduism</option>
+  <option value="HIP">Highly Indebted Poor Countries (HIPC)</option>
+  <option value="hjw">Hasidic</option>
+  <option value="HKG">Hong Kong</option>
+  <option value="hmn">Hmong</option>
+  <option value="hmo">Hiri Motu</option>
+  <option value="HMS">Hamas</option>
+  <option value="HND">Honduras</option>
+  <option value="hni">Hani</option>
+  <option value="hoa">Hoa</option>
+  <option value="hon">Hondurans</option>
+  <option value="hrt">Haratin</option>
+  <option value="hrv">Croats</option>
+  <option value="HRV">Croatia</option>
+  <option value="HRW">Human Rights Watch</option>
+  <option value="hsb">Upper Sorbian</option>
+  <option value="HSD">Hasidic</option>
+  <option value="HTI">Haiti</option>
+  <option value="hui">Hui</option>
+  <option value="hun">Hungarian</option>
+  <option value="HUN">Hungary</option>
+  <option value="hup">Hupa</option>
+  <option value="hut">Hutu</option>
+  <option value="IAC">Inter-African Coffee Organization (IACO)</option>
+  <option value="IAD">Intergovernmental Authority on Development (IGAD)</option>
+  <option value="IAE">International Atomic Energy Agency (IAEA)</option>
+  <option value="IAF">Islamic Action Front</option>
+  <option value="iba">Iban</option>
+  <option value="ibo">Igbo</option>
+  <option value="ICC">International Criminal Court</option>
+  <option value="ice">Icelanders</option>
+  <option value="ICG">International Crisis Group</option>
+  <option value="ICJ">International Court of Justice (ICJ)</option>
+  <option value="ICO">International Cocoa Organization (ICCO)</option>
+  <option value="IDB">Islamic Development Bank</option>
+  <option value="idg">Indigenous</option>
+  <option value="idn">Indian</option>
+  <option value="IDN">Indonesia</option>
+  <option value="IGC">International Grains Council</option>
+  <option value="IHF">International Helsinki Federation for Human Rights</option>
+  <option value="iii">Yi</option>
+  <option value="ijo">Ijaw</option>
+  <option value="iku">Inuit</option>
+  <option value="ilo">Ilocono</option>
+  <option value="ILO">International Labor Organization</option>
+  <option value="IMF">International Monetary Fund (IMF)</option>
+  <option value="IMY">Isle of Man</option>
+  <option value="ind">Indonesian</option>
+  <option value="IND">India</option>
+  <option value="inh">Ingush</option>
+  <option value="IOM">International Organization for Migration</option>
+  <option value="ipk">Inupiat</option>
+  <option value="IPU">Inter-Parliamentary Union</option>
+  <option value="ira">Iranian</option>
+  <option value="IRC">Red Cross</option>
+  <option value="IRL">Ireland</option>
+  <option value="IRN">Iran</option>
+  <option value="iro">Iroquois</option>
+  <option value="IRQ">Iraq</option>
+  <option value="ISJ">Palestinian Islamic Jihad</option>
+  <option value="ISL">Iceland</option>
+  <option value="ISR">Israel</option>
+  <option value="ita">Itallian</option>
+  <option value="ITA">Italy</option>
+  <option value="ITP">Interpol</option>
+  <option value="ITR">Indigenous Tribal Religion</option>
+  <option value="JAM">Jamaica</option>
+  <option value="jan">Jain</option>
+  <option value="JAN">Jainism</option>
+  <option value="jav">Javanese</option>
+  <option value="jew">Jewish</option>
+  <option value="JEW">Judaism</option>
+  <option value="jhw">Jehovah's Witnesses</option>
+<option value="JHW">Jehovah's Witness</option>
+  <option value="jin">Jino</option>
+  <option value="jol">Jola</option>
+  <option value="JOR">Jordan</option>
+  <option value="jpn">Japanese</option>
+  <option value="JPN">Japan</option>
+  <option value="JUR">International Commission of Jurists</option>
+  <option value="kaa">Karakalpak</option>
+  <option value="kab">Kabyle</option>
+  <option value="kac">Kachin</option>
+  <option value="kad">Kadazan</option>
+  <option value="kak">Kakwa-Nubian</option>
+  <option value="kal">Kalaallit</option>
+  <option value="kam">Kamba</option>
+  <option value="kan">Kannada</option>
+  <option value="kao">Kaonde</option>
+  <option value="kar">Karen</option>
+  <option value="kas">Kashmiri</option>
+  <option value="kau">Kanuri</option>
+  <option value="kav">Kavango</option>
+  <option value="kaz">Kazakhs</option>
+  <option value="KAZ">Kazakhstan</option>
+  <option value="kbd">Kabarday</option>
+  <option value="kby">Kabye</option>
+  <option value="kch">Karachays</option>
+  <option value="KDP">Kurdish Democratic Party (KDP)</option>
+  <option value="KEN">Kenya</option>
+  <option value="KGZ">Kyrgyzstan</option>
+  <option value="kha">Khasi</option>
+  <option value="khi">Khoikhoi</option>
+  <option value="khk">Khakas</option>
+  <option value="khm">Khmer</option>
+  <option value="KHM">Cambodia</option>
+  <option value="khu">Khmu</option>
+  <option value="KID">United Nations Children?s Fund (UNICEF)</option>
+  <option value="kik">Kikuyu</option>
+  <option value="kin">Kinyarwanda Speakers</option>
+  <option value="kir">Kyrgyz</option>
+  <option value="KIR">Kiribati</option>
+  <option value="kis">Kisii</option>
+  <option value="klm">Kalmyk</option>
+  <option value="kmb">North Mbundu</option>
+  <option value="KNA">Saint Kitts-Nevis</option>
+  <option value="kno">Kono</option>
+  <option value="knr">Kanuri</option>
+  <option value="kok">Kokani</option>
+  <option value="kom">Komi</option>
+  <option value="kon">Kongo</option>
+  <option value="kor">Korean</option>
+  <option value="KOR">South Korea</option>
+  <option value="kos">Kosraean</option>
+  <option value="kou">Kouyou</option>
+  <option value="kpe">Kpelle</option>
+  <option value="krh">Krahn</option>
+  <option value="krl">Karelians</option>
+  <option value="krm">Karamojong</option>
+  <option value="kro">Kru</option>
+  <option value="kru">Kurukh</option>
+  <option value="kua">Kwanyama</option>
+  <option value="kum">Kumyks</option>
+  <option value="kur">Kurd</option>
+  <option value="KUR">Kurd</option>
+  <option value="kut">Ktunaxa</option>
+  <option value="KWT">Kuwait</option>
+  <option value="lad">Sephardic Jew</option>
+  <option value="lak">Lak (Russia)</option>
+  <option value="lam">Lamba</option>
+  <option value="LAM">Latin America</option>
+  <option value="lao">Lao</option>
+  <option value="LAO">Laos</option>
+  <option value="lar">Lari</option>
+  <option value="lav">Latvian</option>
+  <option value="lba">Limba</option>
+  <option value="LBA">Israeli Labor Party</option>
+  <option value="LBN">Lebanon</option>
+  <option value="LBR">Liberia</option>
+  <option value="LBY">Libya</option>
+  <option value="LCA">Saint Lucia</option>
+  <option value="lds">Latter Day Saints</option>
+  <option value="LDS">Latter Day Saints</option>
+  <option value="len">Lenca</option>
+  <option value="lez">Lezgian</option>
+  <option value="lgb">Lugbara</option>
+  <option value="lhu">Lahu</option>
+  <option value="LIE">Liechtenstein</option>
+  <option value="lii">Li</option>
+  <option value="lim">Limburgian</option>
+  <option value="lin">Lingala</option>
+  <option value="lit">Lithuanian</option>
+  <option value="LKA">Sri Lanka</option>
+  <option value="LKD">Likud Party</option>
+  <option value="lol">Mongo</option>
+  <option value="lom">Lomwe</option>
+  <option value="lov">Lovale</option>
+  <option value="loz">Lozi</option>
+  <option value="LSO">Lesotho</option>
+  <option value="lsu">Lisu</option>
+  <option value="ltk">Latoka</option>
+  <option value="ltn">Latinos</option>
+  <option value="LTU">Lithuania</option>
+  <option value="ltz">Luxembourgers</option>
+  <option value="lua">Luba-Kasai</option>
+  <option value="lub">Luba-Katanga</option>
+  <option value="lug">Baganda</option>
+  <option value="luh">Luhya</option>
+  <option value="lui">Luiseno</option>
+  <option value="lul">Lulua</option>
+  <option value="lun">Lunda</option>
+  <option value="luo">Luo</option>
+  <option value="lus">Lusei</option>
+  <option value="LUX">Luxembourg</option>
+  <option value="LVA">Latvia</option>
+  <option value="mac">Macedonian</option>
+  <option value="MAC">Macao</option>
+  <option value="mad">Madurese</option>
+  <option value="maf">Mafwe</option>
+  <option value="mag">Magahi</option>
+  <option value="mah">Marshallese</option>
+  <option value="mai">Maithili</option>
+  <option value="mak">Makassarese</option>
+  <option value="mal">Malayalam</option>
+  <option value="man">Mandinka</option>
+  <option value="mao">Maori</option>
+  <option value="mar">Marathi</option>
+  <option value="MAR">Morocco</option>
+  <option value="mas">Maasai</option>
+  <option value="may">Malays</option>
+  <option value="mba">Mbandja</option>
+  <option value="mbe">Mbere</option>
+  <option value="mbk">M'Baka</option>
+<option value="mbo">Mbochi</option>
+<option value="MBR">Muslim Brotherhood</option>
+<option value="mbu">Mbundu-Mestico</option>
+<option value="MCO">Monaco</option>
+<option value="MDA">Moldova</option>
+<option value="mdf">Mokshas</option>
+<option value="MDG">Madagascar</option>
+<option value="mdh">Madhesi</option>
+<option value="mdi">Madi</option>
+<option value="mdr">Mandar</option>
+<option value="MDT">Mediterranean</option>
+<option value="MDV">Maldives</option>
+<option value="MEA">Middle East</option>
+<option value="men">Mende</option>
+<option value="MEX">Mexico</option>
+<option value="MHL">Marshall Islands</option>
+<option value="mia">Miao</option>
+<option value="mic">Mi'kmaq</option>
+  <option value="mij">Mijikenda</option>
+  <option value="min">Minangkabau</option>
+  <option value="miz">Mizo</option>
+  <option value="MKD">Macedonia</option>
+  <option value="mla">Mulatto</option>
+  <option value="mld">Mole-Dagbani</option>
+  <option value="mlg">Malagasy</option>
+  <option value="MLI">Mali</option>
+  <option value="mlo">Mulao</option>
+  <option value="mlt">Maltese</option>
+  <option value="MLT">Malta</option>
+  <option value="MMR">Myanmar</option>
+  <option value="mnc">Manchu</option>
+  <option value="mnd">Mande</option>
+  <option value="mng">Mananja-Nayanja</option>
+  <option value="MNG">Mongolia</option>
+  <option value="mnh">Minahasa</option>
+  <option value="mni">Manipuri</option>
+  <option value="mnj">Manjack</option>
+  <option value="mnn">Mano</option>
+  <option value="mno">Lumad</option>
+  <option value="MNP">Northern Mariana Islands</option>
+  <option value="mns">Mon</option>
+  <option value="mny">Manyika</option>
+  <option value="moh">Mohajirs</option>
+  <option value="moh">Mohawk</option>
+  <option value="mok">Makonde</option>
+  <option value="mon">Maonan</option>
+  <option value="mon">Mongol</option>
+  <option value="mos">Mossi</option>
+  <option value="MOS">Muslim</option>
+  <option value="MOZ">Mozambique</option>
+  <option value="mri">Mari</option>
+  <option value="mrn">Maronites</option>
+  <option value="MRN">Maronite</option>
+  <option value="mro">Moro</option>
+  <option value="MRT">Mauritania</option>
+  <option value="MRZ">Meretz Party</option>
+  <option value="MSF">Medecins Sans Frontieres (Doctors Without Borders)</option>
+  <option value="msk">Miskito</option>
+  <option value="msl">Muslim</option>
+  <option value="MSP">Movement of the Society for Peace</option>
+  <option value="MSR">Montserrat</option>
+  <option value="mtn">Montenegrins</option>
+  <option value="MTN">Montenegro</option>
+  <option value="MTQ">Martinique</option>
+  <option value="mtz">Mestizo</option>
+  <option value="mun">Munda</option>
+  <option value="muo">Muong</option>
+  <option value="mus">Muscogee</option>
+  <option value="MUS">Mauritius</option>
+  <option value="MWI">Malawi</option>
+  <option value="mwl">Mirandese</option>
+  <option value="mwr">Marwaris</option>
+  <option value="mya">Mayangnas</option>
+  <option value="mye">Myene</option>
+  <option value="myn">Maya</option>
+  <option value="MYS">Malaysia</option>
+  <option value="MYT">Mayotte</option>
+  <option value="myv">Mordvins</option>
+  <option value="NAF">North Africa</option>
+  <option value="nag">Naga</option>
+  <option value="nah">Nahua</option>
+  <option value="nai">Native American</option>
+  <option value="nam">Nama</option>
+  <option value="NAM">Namibia</option>
+  <option value="nap">Neapolitan</option>
+  <option value="NAT">North Atlantic Treaty Organization (NATO)</option>
+  <option value="nau">Nauruan</option>
+  <option value="nav">Navajo</option>
+  <option value="nax">Nakhi</option>
+  <option value="nba">Nuba</option>
+  <option value="nbl">South Ndebele</option>
+  <option value="nca">Nicaraguan</option>
+  <option value="NCL">New Caledonia</option>
+  <option value="nde">Northern Ndebele</option>
+  <option value="ndo">Ndonga</option>
+  <option value="nep">Nepali</option>
+  <option value="NEP">New Economic Partnership for Africa?s Development</option>
+  <option value="ner">Nuer</option>
+  <option value="NER">Niger</option>
+  <option value="new">Newars</option>
+  <option value="NFK">Norfolk Island</option>
+  <option value="NGA">Nigeria</option>
+  <option value="ngn">Ngbandi</option>
+  <option value="ngo">Ngoni</option>
+  <option value="nia">Niasans</option>
+  <option value="nib">Nibolek</option>
+  <option value="NIC">Nicaragua</option>
+  <option value="nir">Niari</option>
+  <option value="niu">Niuean</option>
+  <option value="NIU">Niue</option>
+  <option value="nkm">Nkomi</option>
+  <option value="NLD">Netherlands</option>
+  <option value="NMR">North America</option>
+  <option value="nng">Nung</option>
+  <option value="nog">Nogais</option>
+  <option value="NON">Organization of Non-Aligned Countries</option>
+  <option value="nor">Norwegians</option>
+  <option value="NOR">Norway</option>
+  <option value="NPL">Nepal</option>
+  <option value="NRM">New Religious Movement</option>
+  <option value="NRU">Nauru</option>
+  <option value="nso">Northern Sotho</option>
+  <option value="nub">Nubian</option>
+  <option value="nur">Nuristani</option>
+  <option value="nuu">Nu</option>
+  <option value="nya">Chewa</option>
+  <option value="nyk">Nyakyusa</option>
+  <option value="nym">Nyamwezi</option>
+  <option value="nyn">Ankole</option>
+  <option value="nyo">Nyoro</option>
+  <option value="nze">New Zealanders</option>
+  <option value="nzi">Nzema</option>
+  <option value="NZL">New Zealand</option>
+  <option value="OAS">Organization of American States</option>
+  <option value="OAU">Organization of African Unity (OAU)</option>
+  <option value="oci">Occitanians</option>
+  <option value="ogo">Ogoni</option>
+  <option value="OIC">Organization of Islamic Conferences (OIC)</option>
+  <option value="oji">Ojibwe</option>
+  <option value="ojw">Orthodox/Ultra-Orthodox Jew</option>
+  <option value="oki">Okinawan</option>
+  <option value="OMN">Oman</option>
+  <option value="OPC">Organization of Petroleum Exporting Countries (OPEC)</option>
+  <option value="ori">Oriya</option>
+  <option value="orm">Oromo</option>
+  <option value="oru">Orgunu</option>
+  <option value="osa">Osage</option>
+  <option value="oss">Ossetians</option>
+  <option value="oto">Otomi</option>
+  <option value="ova">Ovambo</option>
+  <option value="paa">Papuan</option>
+  <option value="pac">Pacific Islanders</option>
+  <option value="pag">Pangasinan</option>
+  <option value="PAG">Pagan</option>
+  <option value="PAK">Pakistan</option>
+  <option value="pal">Palestinian</option>
+  <option value="PAL">Palestinian</option>
+  <option value="pam">Kapampangan</option>
+  <option value="pan">Punjabi</option>
+  <option value="PAN">Panama</option>
+  <option value="pap">Papiamento-Creole</option>
+  <option value="PAP">Pan-African Parliament</option>
+  <option value="par">Paraguayan</option>
+  <option value="pau">Palauan</option>
+  <option value="PCN">Pitcairn</option>
+  <option value="per">Persian</option>
+  <option value="PER">Peru</option>
+  <option value="PFL">People's Front for the Liberation of Palestine (PFLP)</option>
+  <option value="pgn">Animist/Pagan</option>
+  <option value="PGS">Persian Gulf</option>
+  <option value="PHL">Philippines</option>
+  <option value="phu">Puthai</option>
+  <option value="PLF">Palestine Liberation Front</option>
+  <option value="PLO">Palestine Liberation Organization</option>
+  <option value="PLS">Polisario Guerillas</option>
+  <option value="PLW">Palau</option>
+  <option value="PMD">People's Mujahedeen</option>
+  <option value="PNG">Papua New Guinea</option>
+  <option value="pnm">Panamanians</option>
+  <option value="pol">Poles</option>
+  <option value="POL">Poland</option>
+  <option value="pom">Pomaks</option>
+  <option value="pon">Pehnpeian</option>
+  <option value="por">Portuguese </option>
+  <option value="ppl">Papel</option>
+  <option value="PRC">Paris Club</option>
+  <option value="PRI">Puerto Rico</option>
+  <option value="PRK">North Korea</option>
+  <option value="pro">Protestant</option>
+  <option value="PRO">Protestant</option>
+  <option value="PRT">Portugal</option>
+  <option value="pru">Peruvian</option>
+  <option value="PRY">Paraguay</option>
+  <option value="PSE">Occupied Palestinian Territory</option>
+  <option value="PSE">Occupied Palestinian Territories</option>
+  <option value="psh">Pashayi</option>
+  <option value="pum">Pumi</option>
+  <option value="pus">Pashtun</option>
+  <option value="PYF">French Polynesia</option>
+  <option value="QAT">Qatar</option>
+  <option value="qia">Qiang</option>
+  <option value="qiz">Qizilbash</option>
+  <option value="que">Quechua</option>
+  <option value="raj">Rajasthani</option>
+  <option value="ran">Pahari Rajput</option>
+  <option value="rap">Rapa Nui</option>
+  <option value="rar">Cook Islands Maori</option>
+  <option value="RCR">Red Crescent</option>
+  <option value="rel">Unspecified Religion</option>
+  <option value="REU">Runion</option>
+  <option value="RND">Democratic National Rally</option>
+  <option value="roh">Romansh</option>
+  <option value="rom">Romani</option>
+  <option value="ROM">Romania</option>
+  <option value="rum">Romanian</option>
+  <option value="run">Rundi</option>
+  <option value="rup">Aromanians</option>
+  <option value="rus">Russian</option>
+  <option value="RUS">Russia</option>
+  <option value="RWA">Rwanda</option>
+  <option value="SAA">South Asian Association</option>
+  <option value="sad">Sandawe</option>
+  <option value="SAD">Southern African Development Community</option>
+  <option value="SAF">Southern Africa</option>
+  <option value="sag">Sango</option>
+  <option value="sah">Yakuts</option>
+  <option value="sal">Salish</option>
+  <option value="SAM">South America</option>
+  <option value="sar">Sara</option>
+  <option value="sas">Sasak</option>
+  <option value="SAS">South Asia</option>
+  <option value="sat">Sudanese</option>
+  <option value="SAU">Saudi Arabia</option>
+  <option value="SCE">Council of Security and Cooperation in Europe (OSCE)</option>
+  <option value="scn">Sicilian</option>
+  <option value="SCN">Scandinavia</option>
+  <option value="sco">Scottish</option>
+  <option value="SDN">Sudan</option>
+  <option value="SEA">Southeast Asia</option>
+  <option value="sel">Selkup</option>
+  <option value="sen">Sena</option>
+  <option value="SEN">Senegal</option>
+  <option value="sfi">Sufi</option>
+  <option value="SFI">Sufi</option>
+  <option value="SGP">Singapore</option>
+  <option value="sha">Shafi'i</option>
+  <option value="SHA">Shas Party</option>
+  <option value="she">She</option>
+  <option value="shi">Shi'ites</option>
+  <option value="SHI">Shia</option>
+  <option value="shl">Shilluk</option>
+  <option value="shn">Shan</option>
+  <option value="SHN">Saint Helena</option>
+  <option value="SHN">Old Shinto School</option>
+  <option value="shy">Shaigiya</option>
+  <option value="sid">Sidama</option>
+  <option value="SIK">Sikh</option>
+  <option value="sin">Sinhalese</option>
+  <option value="sio">Siouan</option>
+  <option value="SJM">Svalbard and Jan Mayen Islands</option>
+  <option value="sla">Slavic</option>
+  <option value="SLB">Solomon Islands</option>
+  <option value="SLE">Sierra Leone</option>
+  <option value="slo">Slovaks</option>
+  <option value="slr">Salar</option>
+  <option value="slv">Slovenes</option>
+  <option value="SLV">El Salvador</option>
+  <option value="smi">Sami</option>
+  <option value="smo">Samoans</option>
+  <option value="SMR">San Marino</option>
+  <option value="sna">Shona</option>
+  <option value="snd">Sindhi</option>
+  <option value="snk">Soninke</option>
+  <option value="som">Somali</option>
+  <option value="SOM">Somalia</option>
+  <option value="son">Songhai</option>
+  <option value="sot">Sotho</option>
+  <option value="SOT">Southeast Asia Collective Defense Treaty (SEATO)</option>
+  <option value="spa">Spanish</option>
+  <option value="SPM">Saint Pierre and Miquelon</option>
+  <option value="SRB">Serbia</option>
+  <option value="srd">Sardinian</option>
+  <option value="srn">Sranan Tongo</option>
+  <option value="srp">Serbs</option>
+  <option value="srr">Serer</option>
+  <option value="srr">Serer</option>
+  <option value="ssw">Swazi</option>
+  <option value="STP">Sao Tome and Principe</option>
+  <option value="sui">Sui</option>
+  <option value="suk">Sukama</option>
+  <option value="sun">Sunni</option>
+  <option value="SUN">Sunni</option>
+  <option value="SUR">Suriname</option>
+  <option value="sus">Susu</option>
+  <option value="SVK">Slovakia</option>
+  <option value="SVN">Slovenia</option>
+  <option value="swa">Swahili</option>
+  <option value="swe">Swedes</option>
+  <option value="SWE">Sweden</option>
+  <option value="swf">Swiss French</option>
+  <option value="swt">Swiss Italian</option>
+  <option value="SWZ">Swaziland</option>
+  <option value="SYC">Seychelles</option>
+  <option value="SYR">Syria</option>
+  <option value="tab">Tabasaran</option>
+  <option value="tah">Tahitian</option>
+  <option value="tai">Tai</option>
+  <option value="TAL">Taliban</option>
+  <option value="tam">Tamil</option>
+  <option value="tao">Taoist</option>
+  <option value="TAO">Taoist</option>
+  <option value="tat">Tatars</option>
+  <option value="taw">Tawahka</option>
+  <option value="tay">Tay</option>
+  <option value="TCA">Turks and Caicos Islands</option>
+  <option value="TCD">Chad</option>
+  <option value="tel">Telugu</option>
+  <option value="tem">Temne</option>
+  <option value="ter">Terenan</option>
+  <option value="tes">Teso</option>
+  <option value="tet">Tetum</option>
+  <option value="tgk">Tajik</option>
+  <option value="tgl">Tagalog</option>
+  <option value="TGO">Togo</option>
+  <option value="tha">Thai</option>
+  <option value="THA">Thailand</option>
+  <option value="tib">Tibetan</option>
+  <option value="tig">Tigre</option>
+  <option value="tir">Tigray-Tigrinya</option>
+  <option value="tiv">Tiv</option>
+  <option value="TJK">Tajikistan</option>
+  <option value="tkl">Tokelauan</option>
+  <option value="TKL">Tokelau</option>
+  <option value="TKM">Turkmenistan</option>
+  <option value="tli">Tlingit</option>
+  <option value="tmh">Tuareg</option>
+  <option value="TMP">East Timor</option>
+  <option value="tms">Tama</option>
+  <option value="tog">Tonga (Africa)</option>
+  <option value="ton">Tonga (Pacific)</option>
+  <option value="TON">Tonga</option>
+  <option value="tor">Tooro</option>
+  <option value="tou">Toubou</option>
+  <option value="tpi">Tok Pisin</option>
+  <option value="tra">Transnistrians</option>
+  <option value="tri">Tripuri</option>
+  <option value="trn">Ternate</option>
+  <option value="tsi">Tsimshian</option>
+  <option value="tsn">Tswana</option>
+  <option value="tso">Tsonga</option>
+  <option value="TTO">Trinidad and Tobago</option>
+  <option value="tts">Tutsi</option>
+  <option value="tuj">Tujia</option>
+  <option value="tuk">Turkmen</option>
+  <option value="tum">Tumbuka</option>
+  <option value="TUN">Tunisia</option>
+  <option value="tup">Tupi</option>
+  <option value="tur">Turkish</option>
+  <option value="TUR">Turkey</option>
+  <option value="tuu">Mongour</option>
+  <option value="TUV">Tuvalu</option>
+  <option value="tvl">Tuvaluans</option>
+  <option value="twi">Ashanti</option>
+  <option value="twn">Taiwanese</option>
+  <option value="TWN">Taiwan</option>
+  <option value="tyv">Tuvans</option>
+  <option value="TZA">Tanzania</option>
+  <option value="udm">Udmurt</option>
+  <option value="UDX">Ultra-Orthodox</option>
+  <option value="UEM">Economic and Monetary Union of West Africa (UEMOA)</option>
+  <option value="UGA">Uganda</option>
+  <option value="uig">Uyghur</option>
+  <option value="ukr">Ukranian</option>
+  <option value="UKR">Ukraine</option>
+  <option value="umb">Southern Mbundu</option>
+  <option value="und">Undetermined</option>
+  <option value="UNO">United Nations</option>
+  <option value="urd">Urdu</option>
+  <option value="URY">Uruguay</option>
+  <option value="USA">United States</option>
+  <option value="uzb">Uzbeks</option>
+  <option value="UZB">Uzbekistan</option>
+  <option value="vaa">Va</option>
+  <option value="vai">Vai</option>
+  <option value="VAT">Vatican City</option>
+  <option value="VCT">Saint Vincent and the Grenadines</option>
+  <option value="ven">Venda</option>
+  <option value="VEN">Venezuela</option>
+  <option value="VGB">British Virgin Islands</option>
+  <option value="vie">Vietnamese</option>
+  <option value="vil">Vili</option>
+  <option value="VIR">United States Virgin Islands</option>
+  <option value="VNM">Vietnam</option>
+  <option value="vnz">Venezuelan</option>
+  <option value="vot">Votes</option>
+  <option value="VUT">Vanuatu</option>
+  <option value="WAD">West Africa Development Bank</option>
+  <option value="WAF">West Africa</option>
+  <option value="wak">Wakashan</option>
+  <option value="wal">Welayta</option>
+  <option value="WAM">West Africa Monetary and Economic Union</option>
+  <option value="war">Waray</option>
+  <option value="was">Washoe</option>
+  <option value="WAS">Economic Community of West African States (ECOWAS)</option>
+  <option value="WBK">World Bank</option>
+  <option value="WCT">International War Crimes Tribunals</option>
+  <option value="WEF">World Economic Forum</option>
+  <option value="wel">Welsch</option>
+  <option value="wel">Welsh</option>
+  <option value="wen">Sorbs</option>
+  <option value="WFP">World Food Program</option>
+  <option value="whi">Whites</option>
+  <option value="WHO">World Health Organization</option>
+  <option value="WLF">Wallis and Futuna Islands</option>
+  <option value="wln">Walloons</option>
+  <option value="wol">Wolof</option>
+  <option value="WSB">West Bank</option>
+  <option value="WSM">Samoa</option>
+  <option value="WST">The West</option>
+  <option value="WTO">World Trade Organization</option>
+  <option value="WTO">World Trade Organization (WTO)</option>
+  <option value="xal">Kalmyk</option>
+  <option value="XFM">Oxfam</option>
+  <option value="xho">Xhosa</option>
+  <option value="xib">Xibe</option>
+  <option value="xnc">Xinca</option>
+  <option value="yao">Yao</option>
+  <option value="yap">Yapese</option>
+  <option value="YEM">Yemen</option>
+  <option value="yor">Yoruba</option>
+  <option value="ypk">Yupik</option>
+  <option value="yug">Yugur</option>
+  <option value="ZAF">South Africa</option>
+  <option value="zag">Zaghawa</option>
+  <option value="zap">Zapotec</option>
+  <option value="zay">Zaidiyya</option>
+  <option value="zen">Zenaga</option>
+  <option value="zha">Zhuang</option>
+  <option value="ZMB">Zambia</option>
+  <option value="znd">Azande</option>
+  <option value="zom">Zomi</option>
+  <option value="zor">Zoroastrians</option>
+  <option value="ZRO">Zoroastrianism</option>
+  <option value="zul">Zulu</option>
+  <option value="zun">Zuni</option>
+  <option value="ZWE">Zimbabwe</option>
+  <option value="zza">Zaza</option></select>
+  <script type="application/json" data-for="Country" data-nonempty="">{}</script>
+  <label class="control-label" for="Event">
+  <h3>Event Code</h3>
+  </label>
+  <select id="Event"><option value="1" selected>Make Public Statement (01)</option>
+  <option value="2">Appeal (02)</option>
+  <option value="3">Express Intent to Cooperate (03)</option>
+  <option value="4">Consult (04)</option>
+  <option value="5">Engage in Diplomatic Cooperation (05)</option>
+  <option value="6">Engage in Material Cooperation (06)</option>
+  <option value="7">Provide Aid (07)</option>
+  <option value="8">Yield (08)</option>
+  <option value="9">Investigate (09)</option>
+  <option value="10">Demand (10)</option>
+  <option value="11">Disapprove (11)</option>
+  <option value="12">Reject (12)</option>
+  <option value="13">Threaten (13)</option>
+  <option value="14">Protest (14)</option>
+  <option value="15">Exhibit Force Posture (15)</option>
+  <option value="16">Reduce Relations (16)</option>
+  <option value="17">Coerce (17)</option>
+  <option value="18">Assault (18)</option>
+  <option value="19">Fight (19)</option>
+  <option value="20">Use Unconventional Mass Violence (20)</option></select>
+  <script type="application/json" data-for="Event" data-nonempty="">{}</script>
+  <input type="button" value="Query" onClick="getQuery();">
+  <div id="Columns" class="control-group shiny-input-checkboxgroup">
+  
+  <label class="control-label" for="Columns">
+  
+  <h3>Columns to Display</h3>
+  </label>
+  <label class="checkbox ">
+  <input type="checkbox" name="Columns" id="Columns1" value="1"/>
+  <span>Latitude</span>
+  </label>
+  <label class="checkbox ">
+  <input type="checkbox" name="Columns" id="Columns2" value="2"/>
+  <span>Longitude</span>
+  </label>
+  <label class="checkbox ">
+  <input type="checkbox" name="Columns" id="Columns3" value="3"/>
+  <span>Location</span>
+  </label>
+  <label class="checkbox ">
+  <input type="checkbox" name="Columns" id="Columns4" value="4"/>
+  <span>Date</span>
+  </label>
+  <label class="checkbox ">
+  <input type="checkbox" name="Columns" id="Columns5" value="5"/>
+  <span>Event Code</span>
+  </label>
+  <label class="checkbox ">
+  <input type="checkbox" name="Columns" id="Columns6" value="6"/>
+  <span>URL</span>
+  </label>
+  <label class="checkbox ">
+  <input type="checkbox" name="Columns" id="Columns7" value="7"/>
+  <span>Avg Tone</span>
+  </label>
+  <label class="checkbox ">
+  <input type="checkbox" name="Columns" id="Columns8" value="8"/>
+  <span>Actor 1</span>
+  </label>
+  <label class="checkbox ">
+  <input type="checkbox" name="Columns" id="Columns9" value="9"/>
+  <span>Actor 2</span>
+  </label>
+  <label class="checkbox ">
+  <input type="checkbox" name="Columns" id="Columns10" value="10"/>
+  <span>Number of Articles</span>
+  </label>
+  <label class="checkbox ">
+  <input type="checkbox" name="Columns" id="Columns11" value="11"/>
+  <span>Event ID Code</span>
+  </label>
+  </div>
+  <button id="update" type="button" class="btn action-button">Update View</button>
+  <a id="downloadData" class="btn shiny-download-link" href="" target="_blank">
+  <i class="fa fa-download"></i>
+  Download
+</a>
+<script language="Javascript">
+  // UPDATE TO USE YOUR PROJECT ID AND CLIENT ID
+  function getQuery(){
+    var project_id = document.getElementById("ProjectID").value;
+		var client_id = document.getElementById("ClientID").value;
+
+		var config = {
+			'client_id': client_id,
+			'scope': 'https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/bigquery'
+		};
+	 function runQuery() {
+     var query1 ='SELECT ActionGeo_Lat,ActionGeo_Long, ActionGeo_FullName,SQLDATE, EventCode,SOURCEURL,AvgTone,Actor1Name,Actor2Name,NumArticles, GLOBALEVENTID FROM [gdelt-bq:full.events] WHERE (REGEXP_MATCH(EventCode, "';
+		var request = gapi.client.bigquery.jobs.query({
+			'projectId': project_id,
+			'timeoutMs': '30000',
+			'query': query1.concat(String(document.getElementById("Event").value), '" )) AND Actor1Code CONTAINS "', String(document.getElementById("Country").value), '" AND (SQLDATE >',  String(document.getElementById("date1").value).replace(/-/g, ''), ')  AND (SQLDATE < ',  String(document.getElementById("date2").value).replace(/-/g, ''), ') GROUP BY SQLDATE,ActionGeo_FullName,ActionGeo_Lat,ActionGeo_Long,EventCode,SOURCEURL,AvgTone,Actor1Name,Actor2Name,NumArticles, GLOBALEVENTID;')
+	 });
+   console.log(request)
+   request.execute(function(response) {     
+			console.log(response)
+			Shiny.onInputChange("mydata", response);
+		});
+	 }
+
+	 function auth() {
+		gapi.auth.authorize(config, function() {
+		gapi.client.load('bigquery', 'v2', runQuery);
+		$('#client_initiated').html('BigQuery client initiated');
+	 });
+	 }
+   auth();
+  };
+</script>
+  </form>
+  </div>
+  <div class="span8">
+  <div id="eventtable" class="shiny-datatable-output"></div>
+  </div>
+  </div>
+  </div>
+  </body>
+  </html>
